@@ -47,33 +47,28 @@
         <h1>List of Items for Particular Users</h1>
         <p>If the form doesn't load, <a href="index2.html" target="_blank">click here</a> to open it in a new tab.</p>
     </header>
-    <p>If the form doesn't load, <a href="index2.html" target="_blank">click here</a> to open it in a new tab.</p>
     <main>
         <iframe 
-            id="enketoForm"
-            src="https://ee.kobotoolbox.org/x/SwzuP8ca">
+            src="https://ee.kobotoolbox.org/x/SwzuP8ca" 
+            title="User Card Form">
         </iframe>
     </main>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const iframe = document.getElementById('enketoForm');
-
-            iframe.onload = function () {
-                // Access the content of the iframe
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('iframe');
+            iframe.onload = function() {
                 const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                const saveDraftButton = iframeDocument.querySelector('button.save-draft');
+                const submitButton = iframeDocument.querySelector('button.submit');
 
-                // Hide or disable the "Save Draft" button
-                const saveDraftButton = iframeDocument.querySelector('button#save-draft');
                 if (saveDraftButton) {
-                    saveDraftButton.style.display = 'none'; // To hide
-                    // saveDraftButton.disabled = true; // Uncomment to disable
+                    saveDraftButton.style.display = 'none'; // To remove the button
+                    // saveDraftButton.disabled = true; // To disable the button
                 }
 
-                // Hide or disable the "Submit" button
-                const submitButton = iframeDocument.querySelector('button#submit-form');
                 if (submitButton) {
-                    submitButton.style.display = 'none'; // To hide
-                    // submitButton.disabled = true; // Uncomment to disable
+                    submitButton.style.display = 'none'; // To remove the button
+                    // submitButton.disabled = true; // To disable the button
                 }
             };
         });
