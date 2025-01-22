@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Form Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/enketo-core@latest"></script>
+</head>
+<body>
+    <div id="form-container"></div>
+
+    <script>
+        async function loadForm() {
+            const response = await fetch('form.xml'); // Load XML file
+            const xmlString = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            
+            const enketo = new EnketoCore({
+                load: () => xmlDoc,  // Load the XML
+                container: document.getElementById('form-container'),
+            });
+
+            enketo.init();
+        }
+
+        loadForm();
+    </script>
+</body>
+</html>
