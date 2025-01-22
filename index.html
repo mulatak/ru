@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,18 +59,24 @@
             const iframe = document.querySelector('iframe');
             iframe.onload = function() {
                 const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                const saveDraftButton = iframeDocument.querySelector('button.save-draft');
-                const submitButton = iframeDocument.querySelector('button.submit');
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        const saveDraftButton = iframeDocument.querySelector('button.save-draft');
+                        const submitButton = iframeDocument.querySelector('button.submit');
 
-                if (saveDraftButton) {
-                    saveDraftButton.style.display = 'none'; // To remove the button
-                    // saveDraftButton.disabled = true; // To disable the button
-                }
+                        if (saveDraftButton) {
+                            saveDraftButton.style.display = 'none'; // To remove the button
+                            // saveDraftButton.disabled = true; // To disable the button
+                        }
 
-                if (submitButton) {
-                    submitButton.style.display = 'none'; // To remove the button
-                    // submitButton.disabled = true; // To disable the button
-                }
+                        if (submitButton) {
+                            submitButton.style.display = 'none'; // To remove the button
+                            // submitButton.disabled = true; // To disable the button
+                        }
+                    });
+                });
+
+                observer.observe(iframeDocument.body, { childList: true, subtree: true });
             };
         });
     </script>
