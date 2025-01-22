@@ -47,11 +47,36 @@
         <h1>List of Items for Particular Users</h1>
         <p>If the form doesn't load, <a href="index2.html" target="_blank">click here</a> to open it in a new tab.</p>
     </header>
-     <p>If the form doesn't load, <a href="index2.html" target="_blank">click here</a> to open it in a new tab.</p>
+    <p>If the form doesn't load, <a href="index2.html" target="_blank">click here</a> to open it in a new tab.</p>
     <main>
         <iframe 
+            id="enketoForm"
             src="https://ee.kobotoolbox.org/x/SwzuP8ca">
         </iframe>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const iframe = document.getElementById('enketoForm');
+
+            iframe.onload = function () {
+                // Access the content of the iframe
+                const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+                // Hide or disable the "Save Draft" button
+                const saveDraftButton = iframeDocument.querySelector('button#save-draft');
+                if (saveDraftButton) {
+                    saveDraftButton.style.display = 'none'; // To hide
+                    // saveDraftButton.disabled = true; // Uncomment to disable
+                }
+
+                // Hide or disable the "Submit" button
+                const submitButton = iframeDocument.querySelector('button#submit-form');
+                if (submitButton) {
+                    submitButton.style.display = 'none'; // To hide
+                    // submitButton.disabled = true; // Uncomment to disable
+                }
+            };
+        });
+    </script>
 </body>
 </html>
