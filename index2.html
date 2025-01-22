@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XML Form Viewer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/enketo-core/css/enketo.css">
     <script src="https://cdn.jsdelivr.net/npm/enketo-core@latest"></script>
 </head>
 <body>
@@ -13,15 +14,23 @@
         async function loadForm() {
             const response = await fetch('form.xml'); // Load XML file
             const xmlString = await response.text();
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            
+
+            // Enketo Core initialization
+            const formContainer = document.getElementById('form-container');
             const enketo = new EnketoCore({
-                load: () => xmlDoc,  // Load the XML
-                container: document.getElementById('form-container'),
+                load: () => ({
+                    form: xmlString,
+                    model: xmlString,
+                }),
+                container: formContainer,
             });
 
-            enketo.init();
+            try {
+                await enketo.init();
+                console.log("Form loaded successfully");
+            } catch (error) {
+                console.error("Error loading form:", error);
+            }
         }
 
         loadForm();
