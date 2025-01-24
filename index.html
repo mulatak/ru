@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +21,23 @@
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 1rem 0;
+            padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem; /* Space between logo and text */
+        }
+
+        header img {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
         }
 
         header h1 {
             font-size: 1.8rem;
+            margin: 0;
         }
 
         main {
@@ -45,6 +54,7 @@
 </head>
 <body>
     <header>
+        <img src="logo.png" alt="Logo"> <!-- Replace 'logo.png' with your logo's path -->
         <h1>List of Items for Particular Users</h1>
     </header>
     <main>
